@@ -73,7 +73,8 @@ def get_api_answer(current_timestamp):
 def check_response(response):
     """Проверяет ответ API на корректность.
     Функция должна вернуть список домашних работ (он мб пустым),
-    доступный в ответе API по ключу 'homeworks'."""
+    доступный в ответе API по ключу 'homeworks'.
+    """
     if type(response['homeworks']) is not list:
         raise AssertionError('Ответ возвращет не список')
     if 'homeworks' and 'current_date' in response:
@@ -106,6 +107,7 @@ def check_tokens():
 
 
 def main():
+    """Проверка и отправка статуса."""
     status_homework = None
     # проверяем переменные
     if not check_tokens():
@@ -133,7 +135,8 @@ def main():
             else:
                 logger.debug('Статус задания не обновлён.')
             current_date = response.get('current_date')
-            if current_date is not None and int(current_date) < current_timestamp:
+            if current_date is not None and \
+                    int(current_date) < current_timestamp:
                 logger.error('Проверьте время на сервере')
                 raise DateError
             time.sleep(RETRY_TIME)
