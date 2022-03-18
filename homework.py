@@ -11,11 +11,15 @@ from dotenv import load_dotenv
 
 from exceptions import DateError, NotListOrDict, ResponseNoKey, \
     EndpointNotAvailable, ResponseApiError
-from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
-    RETRY_TIME
+# from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
+#     RETRY_TIME
 
 load_dotenv()
 
+PRACTICUM_TOKEN = os.getenv('YA_TOKEN')
+TELEGRAM_TOKEN = os.getenv('TELE_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('CHAT_ID')
+RETRY_TIME = os.getenv('RETRY_TIME')
 ENDPOINT = os.getenv('ENDPOINT')
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
