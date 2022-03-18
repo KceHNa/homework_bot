@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from exceptions import DateError, NotListOrDict, ResponseNoKey, \
     EndpointNotAvailable, ResponseApiError
 from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
-    RETRY_TIME, ENDPOINT
+    RETRY_TIME
 
 load_dotenv()
 
