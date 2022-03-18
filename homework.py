@@ -65,7 +65,9 @@ def get_api_answer(current_timestamp):
     # Ошибка при запросе
     except Exception as error:
         logger.error(f'Ошибка при запросе к Практикум API: {error}')
-        raise ResponseRequestError(f'Ошибка при запросе к Практикум API: {error}')
+        raise ResponseRequestError(
+            f'Ошибка при запросе к Практикум API: {error}'
+        )
 
 
 def check_response(response):
