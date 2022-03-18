@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 import time
 from http import HTTPStatus
@@ -15,7 +16,7 @@ from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
 
 load_dotenv()
 
-ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
+ENDPOINT = os.getenv('ENDPOINT')
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
 HOMEWORK_STATUSES = {
