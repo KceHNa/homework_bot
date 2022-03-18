@@ -9,7 +9,7 @@ import telegram
 from dotenv import load_dotenv
 
 from exceptions import DateError, NotListOrDict, ResponseNoKey, \
-    EndpointNotAvailable, ResponseRequestError
+    EndpointNotAvailable, ResponseApiError
 from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
     RETRY_TIME, ENDPOINT
 
@@ -65,7 +65,7 @@ def get_api_answer(current_timestamp):
     # Ошибка при запросе
     except Exception as error:
         logger.error(f'Ошибка при запросе к Практикум API: {error}')
-        raise ResponseRequestError(
+        raise ResponseApiError(
             f'Ошибка при запросе к Практикум API: {error}'
         )
 

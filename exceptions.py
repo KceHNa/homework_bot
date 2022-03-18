@@ -17,5 +17,5 @@ class EndpointNotAvailable(ResponseError):
     pass
 
 
-class ResponseRequestError(ResponseError):
+class ResponseApiError(ResponseError):
     pass
