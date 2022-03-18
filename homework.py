@@ -19,7 +19,7 @@ load_dotenv()
 PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
-RETRY_TIME = int(os.getenv('RETRY_TIME'))
+RETRY_TIME = 600
 ENDPOINT = os.getenv('ENDPOINT')
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
