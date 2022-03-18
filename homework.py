@@ -16,10 +16,10 @@ from exceptions import DateError, NotListOrDict, ResponseNoKey, \
 
 load_dotenv()
 
-PRACTICUM_TOKEN = os.getenv('YA_TOKEN')
-TELEGRAM_TOKEN = os.getenv('TELE_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('CHAT_ID')
-RETRY_TIME = os.getenv('RETRY_TIME')
+PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+RETRY_TIME = int(os.getenv('RETRY_TIME'))
 ENDPOINT = os.getenv('ENDPOINT')
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
