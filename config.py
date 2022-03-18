@@ -1,8 +1,6 @@
 import os
 import sys
-from http import HTTPStatus
 
-import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,7 +11,7 @@ if len(TELEGRAM_TOKEN) == 0:
         'Отсутствует токен. Укажите TELEGRAM_TOKEN в .env файле',
         file=sys.stderr,
     )
-    sys.exit(1)
+    # sys.exit(1)
 
 TELEGRAM_CHAT_ID: str = os.getenv('TELEGRAM_CHAT_ID', default='')
 if len(TELEGRAM_CHAT_ID) == 0:
@@ -21,7 +19,7 @@ if len(TELEGRAM_CHAT_ID) == 0:
         'Отсутствует chat_id. Укажите TELEGRAM_CHAT_ID в .env файле',
         file=sys.stderr,
     )
-    sys.exit(1)
+    # sys.exit(1)
 
 RETRY_TIME = int(os.getenv('RETRY_TIME', default='600'))
 
@@ -31,7 +29,7 @@ if len(TELEGRAM_TOKEN) == 0:
         'Отсутствует токен api. Укажите PRACTICUM_TOKEN в .env файле',
         file=sys.stderr,
     )
-    sys.exit(1)
+    # sys.exit(1)
 
 ENDPOINT: str = os.getenv('ENDPOINT', default='')
 if len(ENDPOINT) == 0:
@@ -39,5 +37,5 @@ if len(ENDPOINT) == 0:
         'Отсутствует url ENDPOINTa практикума. Укажите ENDPOINT в .env файле',
         file=sys.stderr,
     )
-    sys.exit(1)
+    # sys.exit(1)
 
