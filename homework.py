@@ -9,8 +9,8 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-from exceptions import DateError, NotListOrDict, ResponseNoKey, \
-    EndpointNotAvailable, ResponseApiError
+from exceptions import (NotListOrDict, ResponseNoKey,
+                        ResponseApiError, TelegramSendError)
 # from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
 #     RETRY_TIME
 
@@ -49,9 +49,9 @@ def send_message(bot, message):
     try:
         bot.send_message(TELEGRAM_CHAT_ID, message)
         logger.info(f'Бот отправил сообщение "{message}"')
-    except Exception as error:
+    except telegram.error.TelegramError as error:
         logger.error(f'Бот не смог отправить сообщение "{message}"')
-        raise telegram.error.TelegramError(f'Сообщение не отправлено: {error}')
+        raise TelegramSendError(f'Сообщение не отправлено: {error}')
 
 
 def get_api_answer(current_timestamp):
@@ -65,10 +65,13 @@ def get_api_answer(current_timestamp):
             params=params
         )
         if response.status_code != HTTPStatus.OK:
-            logger.error(f'Яндекс API {ENDPOINT} недоступен.')
-            raise EndpointNotAvailable(f'Яндекс API {ENDPOINT} недоступен.')
+            logger.error(
+                f'Практикум API вернул ошибку: {response.status_code}'
+            )
+            raise ResponseApiError(
+                f'Практикум API вернул ошибку: {response.status_code}'
+            )
         return response.json()
-    # Ошибка при запросе
     except Exception as error:
         logger.error(f'Ошибка при запросе к Практикум API: {error}')
         raise ResponseApiError(
@@ -82,13 +85,14 @@ def check_response(response):
     доступный в ответе API по ключу 'homeworks'.
     """
     # полученный ответ это словарь
-    if not isinstance(response, (dict, list)):
+    if not isinstance(response, dict):
         logger.error('Ответ возвращет не список')
-        raise NotListOrDict('Ответ возвращет не список')
+        raise TypeError('Ответ возвращет не список')
     # есть ли ключи в этом словаре
     if 'homeworks' and 'current_date' in response:
         logger.info('Ключи есть')
         checked_response = response.get('homeworks')
+        # homeworks - это список
         if not isinstance(checked_response, list):
             raise NotListOrDict('Ответ homeworks возвращет не список')
     else:
@@ -133,6 +137,7 @@ def main():
         try:
             # отправляем время, от которого выкидывает задания
             response = get_api_answer(current_timestamp)
+            print(response)
             # проверяем ответ от апи
             check_response(response)
             # берем работу
@@ -144,18 +149,13 @@ def main():
                     send_message(bot, parse_status(homeworks))
                 else:
                     logger.debug('Статус задания не обновлён.')
-                current_date = response.get('current_date')
-                if (current_date is not None
-                        and int(current_date) < current_timestamp):
-                    logger.error('Проверьте время на сервере')
-                    raise DateError
+                current_timestamp = response.get('current_date')
             else:
                 logger.info('Текущих работ нет')
 
         except Exception as error:
             message = f'Сбой в работе программы: {error}'
             logger.error(message)
-            time.sleep(RETRY_TIME)
 
         else:
             logger.info(f'Следующая проверка через {RETRY_TIME}s')

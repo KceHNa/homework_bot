@@ -1,10 +1,6 @@
 from xmlrpc.client import ResponseError
 
 
-class DateError(Exception):
-    pass
-
-
 class NotListOrDict(TypeError):
     pass
 
@@ -18,4 +14,8 @@ class EndpointNotAvailable(ResponseError):
 
 
 class ResponseApiError(ResponseError):
+    pass
+
+
+class TelegramSendError(Exception):
     pass
