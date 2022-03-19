@@ -11,15 +11,15 @@ from dotenv import load_dotenv
 
 from exceptions import (NotListOrDict, ResponseNoKey,
                         ResponseApiError, TelegramSendError)
-# from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,\
-#     RETRY_TIME
+from config import (TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,
+                    RETRY_TIME)
 
 load_dotenv()
 
-PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
-RETRY_TIME = 600
+# PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
+# TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+# TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+# RETRY_TIME = 600
 ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
