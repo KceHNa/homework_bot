@@ -15,6 +15,7 @@ from config import (TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,
 
 load_dotenv()
 
+ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
 
 HOMEWORK_STATUSES = {
