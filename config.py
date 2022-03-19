@@ -7,9 +7,7 @@ load_dotenv()
 
 TELEGRAM_TOKEN: str = os.getenv('TELEGRAM_TOKEN', default='')
 
-
 TELEGRAM_CHAT_ID: str = os.getenv('TELEGRAM_CHAT_ID', default='')
-
 
 RETRY_TIME = int(os.getenv('RETRY_TIME', default='600'))
 
