@@ -8,21 +8,18 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-from exceptions import (NotListOrDict, ResponseNoKey,
-                        ResponseApiError, TelegramSendError)
-from config import (TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,
-                    RETRY_TIME)
+from exceptions import (
+    NotListOrDict, ResponseNoKey, ResponseApiError,
+    TelegramSendError
+)
+from config import (
+    TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, PRACTICUM_TOKEN,
+    RETRY_TIME, HOMEWORK_STATUSES, HEADERS, ENDPOINT
+)
 
 load_dotenv()
 
-ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
-HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
-
-HOMEWORK_STATUSES = {
-    'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
-    'reviewing': 'Работа взята на проверку ревьюером.',
-    'rejected': 'Работа проверена: у ревьюера есть замечания.'
-}
+# ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -151,10 +148,8 @@ def main():
             message = f'Сбой в работе программы: {error}'
             logger.error(message)
 
-        else:
-            logger.info(f'Следующая проверка через {RETRY_TIME}s')
-
         finally:
+            logger.info(f'Следующая проверка через {RETRY_TIME}s')
             time.sleep(RETRY_TIME)
 
 

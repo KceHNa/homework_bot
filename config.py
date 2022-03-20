@@ -20,3 +20,11 @@ if len(ENDPOINT) == 0:
         file=sys.stderr,
     )
     # sys.exit(1)
+
+HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
+
+HOMEWORK_STATUSES: dict = {
+    'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
+    'reviewing': 'Работа взята на проверку ревьюером.',
+    'rejected': 'Работа проверена: у ревьюера есть замечания.'
+}
