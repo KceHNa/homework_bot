@@ -19,8 +19,6 @@ from config import (
 
 load_dotenv()
 
-# ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 handler = RotatingFileHandler(
