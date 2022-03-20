@@ -13,12 +13,13 @@ RETRY_TIME = int(os.getenv('RETRY_TIME', default='600'))
 
 PRACTICUM_TOKEN: str = os.getenv('PRACTICUM_TOKEN', default='')
 
-ENDPOINT: str = os.getenv('ENDPOINT', default='')
-if len(ENDPOINT) == 0:
-    print(
-        'Отсутствует url ENDPOINTa практикума. Укажите ENDPOINT в .env файле',
-        file=sys.stderr,
-    )
+ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
+# ENDPOINT: str = os.getenv('ENDPOINT', default='')
+# if len(ENDPOINT) == 0:
+#     print(
+#         'Отсутствует url ENDPOINTa практикума. Укажите ENDPOINT в .env файле',
+#         file=sys.stderr,
+#     )
     # sys.exit(1)
 
 HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
